@@ -10,15 +10,15 @@ const IndexScreen = () => {
 
   return (
     <View>
-      <Icon name='delete'/>
       <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={blogPost => blogPost.title}
         renderItem={({ item }) => {
           return (
-            <View> 
-              <Text>{item.title}</Text>
+            <View style={styles.row}> 
+              <Text style={styles.title}>{item.title}</Text>
+              <Icon style={styles.icon} name='delete'/>
             </View>
           )
         }}
@@ -28,6 +28,21 @@ const IndexScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderTopWidth: 1,
+    borderColor: 'grey'
+  },
+  title: {
+    fontSize: 18
+  },
+  icon: {
+    fontSize: 24
+  }
+});
 
 export default IndexScreen;

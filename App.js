@@ -14,6 +14,7 @@ import {Provider} from './src/context/BlogContext';
 import ShowScreen from './src/screens/ShowScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import EditScreen from './src/screens/EditScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,12 +37,24 @@ const App = () => {
         <Stack.Screen
           name="Show"
           component={ShowScreen}
-          options={{title: 'Show Screen'}}
+          options={({navigation, route}) => ({
+            title: 'Show Screen',
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('Edit', { id: route.params.id})}>
+                <Icon name="edit" size={30} />
+              </TouchableOpacity>
+            )
+          })}
         />
         <Stack.Screen
           name="Create"
           component={CreateScreen}
           options={{title: 'Create Screen'}}
+        />
+        <Stack.Screen
+          name="Edit"
+          component={EditScreen}
+          options={{title: 'Edit Screen'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
